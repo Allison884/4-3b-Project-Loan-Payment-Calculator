@@ -1,35 +1,58 @@
 <!DOCTYPE html>
-
 <html>
 <head>
-<title> Loan Payment Calculator </title>
+<title>Loan Payment Calculator</title>
 
 <script>
 function P() {
-    let a = document.getElementById("PV").value;
-    let b = document.getElementById("r").value;
-  let c = document.getElementById("n").value;
-    let d =  (r * PV) / (1-(1+r)**-n);
-    document.getElementById("ans").innerHTML = d;
-}
+    let PV = Number(document.getElementById("PV").value);
+    let years = Number(document.getElementById("years").value);
+    let percent = Number(document.getElementById("percent").value);
 
+    let r = percent / 100 / 12;
+    let n = years * 12;
+
+    if (PV <= 0 || years <= 0 || percent < 0 ||
+        !Number.isFinite(PV + years + percent)) {
+        document.getElementById("ans").innerHTML =
+            "Please enter valid numbers.";
+        return;
+    }
+
+    let payment;
+
+    if (r === 0) {
+        payment = PV / n;
+    } else {
+        payment = (r * PV) / (1 - (1 + r) ** (-n));
+    }
+
+    document.getElementById("ans").innerHTML =
+        "$" + payment.toFixed(2);
+}
 </script>
 
 </head>
 <body>
-<h3> Fill in the blanks to find your monthly payment</h3>
+
+<h3>Fill in the blanks to find your monthly payment</h3>
 
 <p>
-Present Value - Amount you wish to borrow <input id="PV"> <br>
-Years <input id="r"> <br>
-% <input id="n"> <br>
-<button onclick="P()"> Calculate the Monthly Payment </button>
+Present Value - Amount you wish to borrow
+<input id="PV" type="number"><br>
 
+Years
+<input id="years" type="number"><br>
+
+Annual Interest Rate %
+<input id="percent" type="number" step="any"><br>
+
+<button onclick="P()">Calculate the Monthly Payment</button>
 </p>
 
 <p>
-You Answer is: <span id="ans">____________</span>
+Your Answer is: <span id="ans">____________</span>
 </p>
-  
+
 </body>
 </html>
