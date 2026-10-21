@@ -1,58 +1,31 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
-<head>
-<title>Loan Payment Calculator</title>
+ <head> 
+<title> Loan Payment Calculator </title>
 
-<script>
-function P() {
-    let PV = Number(document.getElementById("PV").value);
-    let years = Number(document.getElementById("years").value);
-    let percent = Number(document.getElementById("percent").value);
+ <script> function P() { 
+let PV = Number(document.getElementById("PV").value); 
+let years = Number (document.getElementById("years").value); 
+let percent = Number (document.getElementById("percent").value);
 
-    let r = percent / 100 / 12;
-    let n = years * 12;
+let r = percent / 100 / 12;
+let n = years * 12;
 
-    if (PV <= 0 || years <= 0 || percent < 0 ||
-        !Number.isFinite(PV + years + percent)) {
-        document.getElementById("ans").innerHTML =
-            "Please enter valid numbers.";
-        return;
-    }
+ let d = (r * PV) / (1 - (1 + r) ** (-n));
+document.getElementById("ans").innerHTML = "$" + d.toFixed(2);
 
-    let payment;
+ } </script> 
 
-    if (r === 0) {
-        payment = PV / n;
-    } else {
-        payment = (r * PV) / (1 - (1 + r) ** (-n));
-    }
+</head> 
+<body> 
+<h3> Fill in the blanks to find your monthly payment</h3> 
 
-    document.getElementById("ans").innerHTML =
-        "$" + payment.toFixed(2);
-}
-</script>
+<p> "Present Value - Amount you wish to borrow" <input id="PV"> 
 
-</head>
-<body>
+<br> "Years" <input id="Years"> 
 
-<h3>Fill in the blanks to find your monthly payment</h3>
+<br> "%" <input id="%"> <br> <button onclick="P()"> Calculate the Monthly Payment 
 
-<p>
-Present Value - Amount you wish to borrow
-<input id="PV" type="number"><br>
-
-Years
-<input id="years" type="number"><br>
-
-Annual Interest Rate %
-<input id="percent" type="number" step="any"><br>
-
-<button onclick="P()">Calculate the Monthly Payment</button>
+</button> 
 </p>
-
-<p>
-Your Answer is: <span id="ans">____________</span>
-</p>
-
-</body>
-</html>
+ <p> Your Answer is: <span id="ans">____________</span> </p> </body> </html>
