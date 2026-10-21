@@ -3,7 +3,9 @@
  <head> 
 <title> Loan Payment Calculator </title>
 
- <script> function P() { 
+ <script> 
+
+function P() { 
 let PV = Number(document.getElementById("PV").value); 
 let years = Number (document.getElementById("years").value); 
 let percent = Number (document.getElementById("percent").value);
@@ -12,7 +14,11 @@ let r = percent / 100 / 12;
 let n = years * 12;
 
  let d = (r * PV) / (1 - (1 + r) ** (-n));
-document.getElementById("ans").innerHTML = "$" + d.toFixed(2);
+ 
+ document.getElementById("loanAmount").innerHTML = PV.toFixed(2);
+    document.getElementById("loanYears").innerHTML = years;
+    document.getElementById("loanRate").innerHTML = percent;
+    document.getElementById("ans").innerHTML = "$" + d.toFixed(2);
 
  } </script> 
 
@@ -30,4 +36,15 @@ document.getElementById("ans").innerHTML = "$" + d.toFixed(2);
 
 </button> 
 </p>
- <p> Your Answer is: <span id="ans">____________</span> </p> </body> </html>
+ 
+<p>
+If you borrow $<span id="loanAmount"></span>
+for <span id="loanYears"></span> years
+at <span id="loanRate"></span>% annual interest,
+your monthly payment will be:
+<span id="ans">____________</span>
+</p>
+
+</body> 
+
+</html>
